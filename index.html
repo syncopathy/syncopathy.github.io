@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jesse Brooke – Senior Technical Recruiter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --navy:   #1a3a5c;
+      --navy-d: #0f2438;
+      --cream:  #f7f4ef;
+      --warm:   #ede8e0;
+      --ink:    #1e1e1e;
+      --muted:  #6b6b6b;
+      --rule:   #c8bfaf;
+      --accent: #c8a96e;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ─────────────────────────────────────── */
+    header {
+      background: var(--navy-d);
+      color: #fff;
+      padding: 72px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,169,110,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    .header-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.1s;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 8vw, 80px);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: #fff;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.2s;
+    }
+
+    .contact-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 24px;
+      margin-top: 32px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.4s;
+    }
+
+    .contact-bar a,
+    .contact-bar span {
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-bar a:hover { color: var(--accent); }
+
+    .contact-sep {
+      color: rgba(255,255,255,0.2);
+      user-select: none;
+    }
+
+    /* ── MAIN LAYOUT ────────────────────────────────── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+    }
+
+    /* ── SECTIONS ───────────────────────────────────── */
+    section {
+      margin-top: 56px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .section-label h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ── SUMMARY ────────────────────────────────────── */
+    .summary p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 2.4vw, 22px);
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--ink);
+    }
+
+    /* ── SKILLS TABLE ───────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      gap: 2px;
+    }
+
+    .skill-row {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 0;
+    }
+
+    .skill-row:nth-child(odd) .skill-cat,
+    .skill-row:nth-child(odd) .skill-val {
+      background: var(--warm);
+    }
+
+    .skill-row:nth-child(even) .skill-cat,
+    .skill-row:nth-child(even) .skill-val {
+      background: #fff;
+    }
+
+    .skill-cat {
+      padding: 11px 16px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .skill-val {
+      padding: 11px 16px;
+      font-size: 13.5px;
+      font-weight: 300;
+      color: #333;
+      line-height: 1.55;
+    }
+
+    /* ── EXPERIENCE ─────────────────────────────────── */
+    .job { margin-bottom: 44px; }
+    .job:last-child { margin-bottom: 0; }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+
+    .job-company {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--navy-d);
+    }
+
+    .job-dates {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .job-meta {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .job-meta .location {
+      font-weight: 300;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .job ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .job ul li {
+      font-size: 14px;
+      font-weight: 300;
+      color: #2a2a2a;
+      line-height: 1.65;
+      padding: 5px 0 5px 20px;
+      position: relative;
+      border-bottom: 1px solid rgba(200,191,175,0.35);
+    }
+
+    .job ul li:last-child { border-bottom: none; }
+
+    .job ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    /* ── EDUCATION ──────────────────────────────────── */
+    .edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .edu-row:last-child { border-bottom: none; }
+
+    .edu-school {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--navy-d);
+    }
+
+    .edu-degree {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 32px 40px;
+      font-size: 11px;
+      color: var(--rule);
+      letter-spacing: 0.08em;
+      border-top: 1px solid var(--warm);
+    }
+
+    /* ── ANIMATIONS ─────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 600px) {
+      .header-inner, main { padding-left: 24px; padding-right: 24px; }
+      .skill-row { grid-template-columns: 1fr; }
+      .skill-cat { padding-bottom: 2px; }
+      .job-header { flex-direction: column; }
+    }
+
+    /* ── PRINT ──────────────────────────────────────── */
+    @media print {
+      header { background: var(--navy-d) !important; -webkit-print-color-adjust: exact; }
+      section { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <p class="eyebrow">Senior Technical Recruiter &nbsp;·&nbsp; EPD Specialist</p>
+    <h1>Jesse<br>Brooke</h1>
+    <div class="contact-bar">
+      <span>971 222 8541</span>
+      <span class="contact-sep">|</span>
+      <a href="mailto:syncopathy@gmail.com">syncopathy@gmail.com</a>
+      <span class="contact-sep">|</span>
+      <a href="https://www.linkedin.com/in/jesse-brooke-nc/" target="_blank" rel="noopener">linkedin.com/in/jessebrooke-nc</a>
+      <span class="contact-sep">|</span>
+      <span>Raleigh, NC</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="summary">
+    <div class="section-label"><h2>Summary</h2></div>
+    <p>Senior Technical Recruiter with 5 years of full-cycle experience hiring across the company, with a focus on EPD in a high-growth fintech consultancy. Built recruiting infrastructure from the ground up at Kunai&nbsp;— ATS implementation, sourcing stack, and hiring process strategy&nbsp;— while scaling the company from 30 to 500+. Equally at home optimizing an existing TA function or standing one up from scratch, including AI-driven interview workflows and Greenhouse integrations. Known for high candidate conversion rates, tight partnerships with engineering and product leadership, and a track record of delivering in ambiguous, fast-moving environments.</p>
+  </section>
+
+  <section class="skills">
+    <div class="section-label"><h2>Core Skills</h2></div>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <div class="skill-cat">Recruiting Scope</div>
+        <div class="skill-val">Full-cycle EPD recruiting · Financial Services · Talent Delivery</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Specializations</div>
+        <div class="skill-val">Software engineers (cloud, data, backend, full stack, DevOps, ML/GenAI, security, network, mobile) · UX/Design · Product · Senior Directors · GTM &amp; Sales</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">ATS &amp; Tooling</div>
+        <div class="skill-val">Greenhouse (implementation + migration) · Lever · Gem · LinkedIn Recruiter · SeekOut · Wellfound · GitHub</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">AI &amp; Integrations</div>
+        <div class="skill-val">AI interview workflow, Grain, Zoom · Claude · Sourcing automation</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Process Building</div>
+        <div class="skill-val">ATS buildout from scratch · Req creation · Requirements facilitation · Technical assessment and interview stage design</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Stakeholder Work</div>
+        <div class="skill-val">Engineering manager &amp; sales director partnership · Executive partnership · Cross-functional alignment</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Outreach</div>
+        <div class="skill-val">Highly personalized outreach · Multi-stage campaigns · Pipeline incubation and conversion optimization</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="experience">
+    <div class="section-label"><h2>Work Experience</h2></div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-company">PricewaterhouseCoopers</span>
+        <span class="job-dates">08/2025 – Present</span>
+      </div>
+      <div class="job-meta">Senior Technical Recruiter <span class="location">· Raleigh, NC</span></div>
+      <ul>
+        <li>Implemented AI-driven interview workflows and streamlined Greenhouse integrations, boosting hiring efficiency and transparency across cross-functional teams</li>
+        <li>Managed resourcing, onboarding, and placement across multiple concurrent projects</li>
+        <li>Focused on delivery and client experience while recruiting senior EPD talent and mentoring junior team members</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-company">Kunai</span>
+        <span class="job-dates">06/2022 – 08/2025</span>
+      </div>
+      <div class="job-meta">Technical Recruiter II <span class="location">· SF Bay Area, Remote</span></div>
+      <ul>
+        <li>Founding recruiter for a Fintech consulting firm serving Fortune 100 clients; scaled company headcount from 30 to 500+</li>
+        <li>Full-desk req owner for forward-deployed and internal engineer, design, and product roles — specializing in cloud, backend, DevOps, security, mobile, ML/GenAI, UX, Senior Directors, FDE, and GTM</li>
+        <li>Built recruiting infrastructure from scratch: ATS implementation, sourcing stack, hiring process strategy, and technical assessment design</li>
+        <li>Partnered tightly with engineering managers, sales directors, and technical interviewers to define requirements and testing strategy</li>
+        <li>Major contributor to rapid growth: Kunai's revenue doubled in 2024 to $51M</li>
+        <li>Won "Excellence in Recruiting" award from CEO, averaging 10–15 hires per quarter</li>
+        <li>Owned hiring processes end-to-end; evangelized transparency; managed expectations around time-to-fill</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-company">Recruit Rise</span>
+        <span class="job-dates">03/2022 – 06/2022</span>
+      </div>
+      <div class="job-meta">Technical Recruiter <span class="location">· Portland, Remote</span></div>
+      <ul>
+        <li>Cold sourced candidates and built personalized outreach campaigns</li>
+        <li>Streamlined candidate pipelines in Greenhouse and Gem</li>
+        <li>Refined job requirements in kickoff meetings; produced conversion rate metrics</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-company">NBC Universal</span>
+        <span class="job-dates">2013 – 2022</span>
+      </div>
+      <div class="job-meta">Production Leadership, Transportation</div>
+      <ul>
+        <li>Provided on-set leadership across high-pressure production days, coordinating logistics and communication between producers, department heads, and crew</li>
+        <li>Developed strategic thinking around resource allocation and cost management on complex, high-spend shoots</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-company">Talent Agent &amp; Producer</span>
+        <span class="job-dates">2016 – 2022</span>
+      </div>
+      <div class="job-meta">Music &amp; Entertainment <span class="location">· Freelance</span></div>
+      <ul>
+        <li>Managed artist rosters, touring logistics, and talent booking for nationally recognized musicians; featured in JazzTimes and New York Music Daily</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="education">
+    <div class="section-label"><h2>Education</h2></div>
+    <div class="edu-row">
+      <span class="edu-school">Lewis &amp; Clark College</span>
+      <span class="edu-degree">BA in Musicology</span>
+    </div>
+    <div class="edu-row">
+      <span class="edu-school">Kansai Gaidai University</span>
+      <span class="edu-degree">Japanese Language &amp; East Asian Studies &nbsp;·&nbsp; Osaka, Japan</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Jesse Brooke &nbsp;·&nbsp; Senior Technical Recruiter &nbsp;·&nbsp; Raleigh, NC
+</footer>
+
+<script>
+  // Scroll-triggered section reveals
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('section').forEach((s, i) => {
+    s.style.transitionDelay = (i * 0.05) + 's';
+    observer.observe(s);
+  });
+</script>
+
+</body>
+</html>
